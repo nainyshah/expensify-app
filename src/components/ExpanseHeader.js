@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const ExpanseHeader = () => (
 	<header>
-		<h1> Expensify </h1>
+		<h1>Expensify</h1>
 		<p>
 			<NavLink activeClassName="is-active" to="/" exact={true}>
 				Home

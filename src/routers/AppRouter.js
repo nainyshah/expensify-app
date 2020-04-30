@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import ExpanseDashboard from '../components/ExpanseDashboard';
-import AddExpanse from '../components/AddExpanse';
-import EditExpanse from '../components/EditExpanse';
+import ExpenseDashboard from '../components/ExpenseDashboard';
+import AddExpanse from '../components/AddExpense';
+import EditExpense from '../components/EditExpense';
 import Help from '../components/Help';
 import NotFound from '../components/NotFound';
 import ExpanseHeader from '../components/ExpanseHeader';
@@ -11,9 +11,9 @@ const AppRoute = () => (
 	<BrowserRouter>
 		<ExpanseHeader />
 		<Switch>
-			<Route path="/" component={ExpanseDashboard} exact={true} />
+			<Route path="/" component={ExpenseDashboard} exact={true} />
 			<Route path="/create" component={AddExpanse} />
-			<Route path="/edit/:id" component={EditExpanse} />
+			<Route path="/edit/:id" component={EditExpense} />
 			<Route path="/help" component={Help} />
 			<Route component={NotFound} />
 		</Switch>

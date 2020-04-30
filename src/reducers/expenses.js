@@ -5,8 +5,6 @@ export default (state = expenseReducerDefaultState, action) => {
 		case 'ADD_EXPENSE':
 			return [...state, action.expense];
 		case 'REMOVE_EXPENSE':
-			console.log('reducer');
-			console.log(action.id);
 			return state.filter(({ id }) => {
 				return id !== action.id;
 			});

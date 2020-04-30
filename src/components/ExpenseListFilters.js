@@ -10,16 +10,26 @@ import {
 
 import { DateRangePicker } from 'react-dates';
 
-class ExpenseListFilter extends React.Component {
+export class ExpenseListFilters extends React.Component {
 	state = {
 		calendarFocused: null,
 	};
 	onDatesChange = ({ startDate, endDate }) => {
-		this.props.dispatch(setStartDate(startDate));
-		this.props.dispatch(setEndDate(endDate));
+		this.props.setStartDate(startDate);
+		this.props.setEndDate(endDate);
 	};
 	onFocusChange = (calendarFocused) => {
 		this.setState(() => ({ calendarFocused }));
+	};
+	onTextChange = (e) => {
+		this.props.setTextFilter(e.target.value);
+	};
+	onSortChange = (e) => {
+		if (e.target.value === 'amount') {
+			this.props.setSortByAmount();
+		} else if (e.target.value === 'date') {
+			this.props.setSortByDate();
+		}
 	};
 	render() {
 		return (
@@ -27,20 +37,9 @@ class ExpenseListFilter extends React.Component {
 				<input
 					type="text"
 					value={this.props.filters.text}
-					onChange={(e) => {
-						props.dispatch(setTextFilter(e.target.value));
-					}}
+					onChange={this.onTextChange}
 				></input>
-				<select
-					value={this.props.filters.sortBy}
-					onChange={(e) => {
-						if (e.target.value === 'amount') {
-							this.props.dispatch(setSortByAmount());
-						} else if (e.target.value === 'date') {
-							this.props.dispatch(setSortByDate());
-						}
-					}}
-				>
+				<select value={this.props.filters.sortBy} onChange={this.onSortChange}>
 					<option value="date">Date</option>
 					<option value="amount">Amount</option>
 				</select>
@@ -61,33 +60,17 @@ class ExpenseListFilter extends React.Component {
 	}
 }
 
-// const ExpenseListFilter = (props) => (
-// 	<div>
-// 		<input
-// 			type="text"
-// 			value={props.filters.text}
-// 			onChange={(e) => {
-// 				props.dispatch(setTextFilter(e.target.value));
-// 			}}
-// 		></input>
-// 		<select
-// 			value={props.filters.sortBy}
-// 			onChange={(e) => {
-// 				if (e.target.value === 'amount') {
-// 					props.dispatch(setSortByAmount());
-// 				} else if (e.target.value === 'date') {
-// 					props.dispatch(setSortByDate());
-// 				}
-// 			}}
-// 		>
-// 			<option value="date">Date</option>
-// 			<option value="amount">Amount</option>
-// 		</select>
-// 	</div>
-// );
+const mapDispatchToProps = (dispatch, props) => ({
+	setStartDate: (startDate) => dispatch(setStartDate(startDate)),
+	setEndDate: (endDate) => dispatch(setEndDate(endDate)),
+	setTextFilter: (text) => dispatch(setTextFilter(text)),
+	setSortByAmount: () => dispatch(setSortByAmount()),
+	setSortByDate: () => dispatch(setSortByDate()),
+});
+
 const mapStateToProps = (state) => {
 	return {
 		filters: state.filters,
 	};
 };
-export default connect(mapStateToProps)(ExpenseListFilter);
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseListFilters);

@@ -1,7 +1,6 @@
 import React from 'react';
 import moment from 'moment';
 import { SingleDatePicker } from 'react-dates';
-import 'react-dates/lib/css/_datepicker.css';
 import 'react-dates/initialize';
 // const date = new moment();
 // console.log(date.format('MMM Do, YYYY'));
@@ -27,10 +26,8 @@ export default class ExpenseForm extends React.Component {
 	};
 	onAmountChange = (e) => {
 		const amount = e.target.value;
-		if (amount.match(/^\d*(\.\d{0,2})?$/)) {
+		if (!amount || amount.match(/^\d*(\.\d{0,2})?$/)) {
 			this.setState(() => ({ amount }));
-		} else {
-			return;
 		}
 	};
 	onDateChange = (createdAt) => {
@@ -41,7 +38,6 @@ export default class ExpenseForm extends React.Component {
 	};
 
 	onSubmit = (e) => {
-		console.log('Submit');
 		e.preventDefault();
 		if (!this.state.description || !this.state.amount) {
 			this.setState(() => ({
