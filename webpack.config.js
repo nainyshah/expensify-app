@@ -6,8 +6,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 module.exports = (env) => {
 	const isProduction = env === 'production';
 	const CSSExtract = new MiniCssExtractPlugin({
-		filename: '[name].css',
-		chunkFilename: '[id].css',
+		filename: 'styles.css',
 	});
 
 	return {
