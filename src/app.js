@@ -11,7 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';
-// import './firebase/firebase';
+import './firebase/firebase';
 console.log('webpack');
 const store = configureStore();
 
