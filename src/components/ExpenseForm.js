@@ -10,7 +10,7 @@ export default class ExpenseForm extends React.Component {
 		this.state = {
 			description: props.expense ? props.expense.description : '',
 			note: props.expense ? props.expense.note : '',
-			amount: props.expense ? props.expense.amount : '',
+			amount: props.expense ? props.expense.amount / 100 : '',
 			createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
 			calendarFocused: false,
 		};
@@ -90,7 +90,9 @@ export default class ExpenseForm extends React.Component {
 						placeholder="Add a note for your expense (optional)"
 					></textarea>
 					<br />
-					<button>Add Expense</button>
+					<button>
+						{this.state.description ? `Edit Expense` : `Add Expense`}
+					</button>
 				</form>
 			</div>
 		);
